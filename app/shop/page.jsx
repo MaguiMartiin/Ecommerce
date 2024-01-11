@@ -8,7 +8,7 @@ const fetchProducts = async () => {
 export default async function Shop () {
     const products = await fetchProducts()
     return (
-        <div className="flex min-h-screen flex-col items-center bg-slate-500">
+        <div className="flex min-h-screen flex-col items-center">
             <div>
                 {products.map(product => (
                     <article key={product.id}>
