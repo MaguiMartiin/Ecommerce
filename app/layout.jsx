@@ -19,7 +19,7 @@ export default async function RootLayout({ children }) {
   const categories = await fetchCategories()
   return (
     <html lang="en">
-      <body className={`${inter.className} p-20 mx-auto`}>
+      <body className={`${inter.className} mt-[2rem] mx-auto`}>
         <Navigation categories={categories} />
         {children}
       </body>
