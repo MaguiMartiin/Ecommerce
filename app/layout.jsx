@@ -1,6 +1,6 @@
 import { Inter } from 'next/font/google'
 import './globals.css'
-import { Navigation } from '../components/Navigation'
+import { NavBar } from '../components/NavBar'
 import axios from 'axios'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -11,16 +11,21 @@ export const metadata = {
 }
 
 const fetchCategories = async () => {
-  try { return (await axios.get('http://localhost:3001/categories')).data;
-  } catch (error) { throw new Error(error.message)}
-}
+  try {
+    return (await axios.get('http://localhost:3001/categories')).data;
+  } catch (error) {
+    console.error('Error en fetchCategories:', error);
+    throw new Error(error.message);
+  }
+};
+
 
 export default async function RootLayout({ children }) {
   const categories = await fetchCategories()
   return (
     <html lang="en">
-      <body className={`${inter.className} mt-[2rem] mx-auto`}>
-        <Navigation categories={categories} />
+      <body className={`${inter.className}  mx-auto`}>
+        <NavBar categories={categories} />
         {children}
       </body>
     </html>

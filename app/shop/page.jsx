@@ -16,6 +16,7 @@ export default async function Shop () {
                         <div>
                             <img src={product.image} alt={product.name} className=" w-96 h-96 object-cover" />
                             <h2 className="flex p-[1rem]">{product.name}</h2>
+                            <h2>{product.Categories[0]?.name}</h2>
                         </div>                        
                     </Link>
                 ))}

@@ -2,6 +2,8 @@
 import Link from "next/link"
 import React, { useState } from "react"
 import { ModalCategories } from "./ModalCategories"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faSearch, faUser, faCartShopping } from "@fortawesome/free-solid-svg-icons"
 
 const links = [{
     label: 'HOME', 
@@ -9,10 +11,19 @@ const links = [{
 }, {
     label: 'SHOP',
     route: '/shop'
+}, {
+    label: '¿CÓMO COMPRAR?',
+    route: '/como-comprar'
+}, {
+    label: 'PREGUNTAS',
+    route: '/preguntas'
+}, {
+    label: 'CONTACTO',
+    route: '/contacto'
 },  
 ]
 
-export function Navigation ({categories}) {
+export function NavBar ({categories}) {
     const [isModalVisible, setIsModalVisible] = useState(false);
 
     const handleShopMouseEnter = () => {
@@ -37,11 +48,11 @@ export function Navigation ({categories}) {
     }
 
     return (
-        <div className="flex p-[1rem] border-b border-red-700">
-            <div>
-                <h1 className="p-[1rem]">ModaVista Boutique</h1>
+        <div className="flex p-[2rem] border-b border-red-700 items-center justify-center">
+            <div className="w-1/4 flex justify-center">
+                <Link href="/">ModaVista Boutique</ Link>
             </div>
-            <div className=" w-[40rem] mx-auto p-[1rem] flex">
+            <div className="w-3/4 flex justify-center">
                 <nav >
                     <ul className="flex space-x-8">
                         {links.map(({label, route}) => (
@@ -59,8 +70,10 @@ export function Navigation ({categories}) {
                     
                 </nav>
             </div>
-            <div>
-                <h1 className="p-[1rem]">ModaVista Boutique</h1>
+            <div className="flex w-1/4 text-lg justify-center space-x-6">
+                <FontAwesomeIcon icon={faSearch} />
+                <FontAwesomeIcon icon={faUser} />
+                <FontAwesomeIcon icon={faCartShopping} />
             </div>
         </div>
     )
