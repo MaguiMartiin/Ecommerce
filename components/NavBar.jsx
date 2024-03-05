@@ -6,9 +6,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faSearch, faUser, faCartShopping } from "@fortawesome/free-solid-svg-icons"
 
 const links = [{
-    label: 'HOME', 
-    route: '/'
-}, {
     label: 'SHOP',
     route: '/shop'
 }, {

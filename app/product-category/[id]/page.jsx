@@ -1,4 +1,6 @@
 import axios from "axios";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
 
 export default async function ProductCategoryId (query) {
     const categoryId = query.params.id
@@ -14,12 +16,19 @@ export default async function ProductCategoryId (query) {
 
     return(
         <div>   
-            <h1>Esto es la categoria {categoryId} </h1>
             {products.map(product => (
-                    <div key={product.id}>
-                        <img src={product.image} alt={product.name} className=" w-96 h-96 object-cover" />
-                        <h2 className="flex p-[1rem]">{product.name}</h2>
-                    </div>       
+                <div key={product.id}>
+                    <div className="p-[2rem]">
+                        <h1 className="flex text-2xl ">{product.Categories[0]?.name}</h1>
+                        <div className=" flex text-sm mt-[0.5rem] space-x-3 items-center">
+                            <h1>Inicio</h1>
+                            <FontAwesomeIcon icon={faAngleRight} />
+                            <h1>{product.Categories[0]?.name} </h1>
+                        </div>
+                    </div>
+                    <img src={product.image} alt={product.name} className=" w-96 h-96 object-cover" />
+                    <h2 className="flex p-[1rem]">{product.name}</h2>
+                </div>       
             ))}
         </div>
     )
