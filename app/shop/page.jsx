@@ -15,8 +15,10 @@ export default async function Shop () {
                     <Link key={product.id} href='/shop/[id]' as={`/shop/${product.id}`}>
                         <div>
                             <img src={product.image} alt={product.name} className=" w-96 h-96 object-cover" />
-                            <h2 className="flex p-[1rem]">{product.name}</h2>
-                            <h2>{product.Categories[0]?.name}</h2>
+                            <div className="p-[1rem] mb-[1rem]">   
+                                <h2 className="mb-[0.2rem] text-lg">{product.name}</h2>
+                                <h2 className="text-sm">{product.Categories[0]?.name}</h2>
+                            </div>
                         </div>                        
                     </Link>
                 ))}
