@@ -41,13 +41,13 @@ const SizeColorList = ({ stock }) => {
         <div>
             <h1 className="mb-[0.5rem]">Talle</h1>
             {stock.map((e) => (
-                <button key={e.size} className={`w-[3rem] text-base p-[0.2rem] rounded-full border border-grey ${selectedSize === e.size ? 'border-black' : ''}`} onClick={() => handleSizeButtonClick(e.size)}>
+                <button key={e.size} className={`w-[3rem] text-base p-[0.2rem] rounded-full border border-grey hover:border-black ${selectedSize === e.size ? 'border-black' : ''}`} onClick={() => handleSizeButtonClick(e.size)}>
                     {e.size}
                 </button>
             ))}
             <h1 className="mt-[2rem] mb-[0.5rem]">Color</h1>
             {stock.map((e) => (
-                <button key={e.color} className={`text-base p-[0.5rem] rounded-full border border-grey ${selectedColor === e.color ? 'border-black' : ''}`} onClick={() => handleColorButtonClick(e.color)}>
+                <button key={e.color} className={`text-base p-[0.5rem] rounded-full border border-grey hover:border-black ${selectedColor === e.color ? 'border-black' : ''}`} onClick={() => handleColorButtonClick(e.color)}>
                     {e.color}
                 </button>
             ))}
@@ -63,7 +63,7 @@ const SizeColorList = ({ stock }) => {
                 )}
                 {(!selectedSize || !selectedColor || isAvailable(selectedSize, selectedColor)) && (
                     <div className='flex mt-[1rem] items-center space-x-11'>
-                        <Counter  maxCount={getMaxCount()} count={count} onCountChange={handleCountChange} className='' />
+                        <Counter  maxCount={getMaxCount()} count={count} onCountChange={handleCountChange} />
                         <button className="bg-black text-white px-4 py-2 rounded-lg flex " onClick={handleAddToCart} disabled={!selectedSize || !selectedColor || !isAvailable(selectedSize, selectedColor)}>
                             Agregar al carrito
                         </button>
