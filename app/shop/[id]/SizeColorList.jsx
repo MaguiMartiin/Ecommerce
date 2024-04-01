@@ -1,9 +1,11 @@
 'use client'
 import { useState } from 'react';
+import Counter from './CounterQuantity';
 
 const SizeColorList = ({ stock }) => {
     const [selectedSize, setSelectedSize] = useState(null)
     const [selectedColor, setSelectedColor] = useState(null)
+    const [count, setCount] = useState(1)
 
     const handleSizeButtonClick = (size) => {
         setSelectedSize(size)
@@ -21,6 +23,18 @@ const SizeColorList = ({ stock }) => {
 
     const handleAddToCart = () => {
         console.log(`Agregado al carrito: Talle ${selectedSize} - Color ${selectedColor}`)
+    }
+
+    const handleCountChange = (newCount) => {
+        setCount(newCount)
+    }
+
+    const getMaxCount = () => {
+        if (selectedSize && selectedColor) {
+            const item = stock.find((item) => item.size === selectedSize && item.color === selectedColor)
+            return item ? item.quantity : 0
+        }
+        return 0
     }
 
     return (
@@ -48,8 +62,9 @@ const SizeColorList = ({ stock }) => {
                 </div>
                 )}
                 {(!selectedSize || !selectedColor || isAvailable(selectedSize, selectedColor)) && (
-                    <div>
-                        <button className="bg-black text-white px-4 py-2 rounded-lg flex mt-[1rem]" onClick={handleAddToCart} disabled={!selectedSize || !selectedColor || !isAvailable(selectedSize, selectedColor)}>
+                    <div className='flex mt-[1rem] items-center space-x-11'>
+                        <Counter  maxCount={getMaxCount()} count={count} onCountChange={handleCountChange} className='' />
+                        <button className="bg-black text-white px-4 py-2 rounded-lg flex " onClick={handleAddToCart} disabled={!selectedSize || !selectedColor || !isAvailable(selectedSize, selectedColor)}>
                             Agregar al carrito
                         </button>
                     </div>
