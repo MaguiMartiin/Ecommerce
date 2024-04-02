@@ -4,6 +4,7 @@ import React, { useState } from "react"
 import { ModalCategories } from "./ModalCategories"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faSearch, faUser, faCartShopping } from "@fortawesome/free-solid-svg-icons"
+import { ModalSearch } from "./ModalSearch"
 
 const links = [{
     label: 'SHOP',
@@ -22,6 +23,7 @@ const links = [{
 
 export function NavBar ({categories}) {
     const [isModalVisible, setIsModalVisible] = useState(false);
+    const [modalSearchVisible, setModalSearchVisible] = useState(false)
 
     const handleShopMouseEnter = () => {
         setIsModalVisible(true);
@@ -43,6 +45,16 @@ export function NavBar ({categories}) {
         setIsModalVisible(false);
         }, 100); 
     }
+
+    const handleOpenModalSearch = () => {
+        setModalSearchVisible(true)
+        document.body.style.overflow = 'hidden'
+    }
+
+    const handleCloseModal = () => {
+        setModalSearchVisible(false);
+        document.body.style.overflow = ''
+    } 
 
     return (
         <div className="flex p-[2rem] border-b border-red-700 items-center justify-center">
@@ -68,9 +80,10 @@ export function NavBar ({categories}) {
                 </nav>
             </div>
             <div className="flex w-1/4 text-lg justify-center space-x-6">
-                <FontAwesomeIcon icon={faSearch} className="w-4" />
-                <FontAwesomeIcon icon={faUser} className="w-4" />
-                <FontAwesomeIcon icon={faCartShopping} className="w-4" />
+                {modalSearchVisible && <ModalSearch categories={categories} handleCloseModal={handleCloseModal}/>}
+                <FontAwesomeIcon icon={faSearch} className="w-4 cursor-pointer" onClick={handleOpenModalSearch} />
+                <FontAwesomeIcon icon={faUser} className="w-4 cursor-pointer" />
+                <FontAwesomeIcon icon={faCartShopping} className="w-4 cursor-pointer" />
             </div>
         </div>
     )
