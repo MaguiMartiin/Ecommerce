@@ -22,7 +22,7 @@ export default async function ProductCategoryId (query) {
                 <h1 className="flex text-2xl ">{categoryName}</h1>
                 <div className=" flex text-sm mt-[0.5rem] space-x-3 items-center">
                     <h1>Inicio</h1>
-                    <FontAwesomeIcon icon={faAngleRight} />
+                    <FontAwesomeIcon icon={faAngleRight} className="w-2" />
                     <h1>{categoryName}</h1>
                 </div>
             </div>

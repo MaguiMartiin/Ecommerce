@@ -68,9 +68,9 @@ export function NavBar ({categories}) {
                 </nav>
             </div>
             <div className="flex w-1/4 text-lg justify-center space-x-6">
-                <FontAwesomeIcon icon={faSearch} />
-                <FontAwesomeIcon icon={faUser} />
-                <FontAwesomeIcon icon={faCartShopping} />
+                <FontAwesomeIcon icon={faSearch} className="w-4" />
+                <FontAwesomeIcon icon={faUser} className="w-4" />
+                <FontAwesomeIcon icon={faCartShopping} className="w-4" />
             </div>
         </div>
     )
