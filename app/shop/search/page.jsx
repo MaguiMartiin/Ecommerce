@@ -26,9 +26,14 @@ export default async function Search (query) {
     
     return(
         <div className=" items-center">
+            {products.length === 0 ? (
+                <p className="p-[2rem] text-xl ">No se encontraron productos para "{name}".</p>
+            ) : (
             <div className="p-[2rem]">
-                <h1 className="flex text-2xl ">Resultados de búsqueda: {name}</h1>
+                <h1 className="flex text-2xl ">Resultados de búsqueda: "{name}" </h1>
             </div>
+            )}
+            
             <div className="grid grid-flow-row gap-1 grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 ">
                 {products.map(product => (
                     <Link key={product.id} href='/shop/[id]' as={`/shop/${product.id}`}>
