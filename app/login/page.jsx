@@ -1,8 +1,20 @@
 'use client'
-import React from 'react';
+import React, { useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+
 
 export default function Login() {
+    const [showPasswords, setShowPasswords] = useState({})
+
+    const togglePasswordVisibility = (fieldName) => {
+        setShowPasswords((prevShowPasswords) => ({
+            ...prevShowPasswords,
+            [fieldName]: !prevShowPasswords[fieldName],
+        }))
+    }
+
     return (
         <div className="flex justify-center items-start space-x-[5rem] p-[3rem]">
             <div className='bg-slate-200 w-1/3 p-[2rem] rounded '>
@@ -35,7 +47,12 @@ export default function Login() {
                             </div>
                             <div  className=" flex flex-col justify-between mt-[2rem]">
                                 <label htmlFor="password">Contraseña</label>
-                                <Field type="password" id="password" name="password" className='p-[0.5rem] rounded h-[2rem]'/>
+                                <Field type={showPasswords['password'] ? 'text' : 'password'} id="password" name="password" className='p-[0.5rem] rounded h-[2rem]'/>
+                                <div className='flex justify-end bg-slate-500 items-end mr-[0.5rem]'>
+                                    <button className='absolute mb-[0.2rem]' onClick={() => togglePasswordVisibility('password')} type='button'>
+                                        <FontAwesomeIcon icon={showPasswords['password'] ? faEye : faEyeSlash} />
+                                    </button>
+                                </div>
                                 <div>
                                     <ErrorMessage name="password" component="p" className="text-red-500 text-sm absolute " />
                                 </div>
@@ -98,14 +115,24 @@ export default function Login() {
                             </div>
                             <div  className=" flex flex-col justify-between mt-[2rem]">
                                 <label htmlFor="password1">Contraseña</label>
-                                <Field type="password" id="password1" name="password1" className='p-[0.5rem] rounded h-[2rem]'/>
+                                <Field type={showPasswords['password1'] ? 'text' : 'password'} id="password1" name="password1" className='p-[0.5rem] rounded h-[2rem]'/>
+                                <div className='flex justify-end bg-slate-500 items-end mr-[0.5rem]'>
+                                    <button className='absolute mb-[0.2rem]' onClick={() => togglePasswordVisibility('password1')} type='button'>
+                                        <FontAwesomeIcon icon={showPasswords['password1'] ? faEye : faEyeSlash}  />
+                                    </button>
+                                </div>
                                 <div>
                                     <ErrorMessage name="password1" component="p" className="text-red-500 text-sm absolute " />
                                 </div>
                             </div>
                             <div  className=" flex flex-col justify-between mt-[2rem]">
                                 <label htmlFor="password">Confirmar contraseña</label>
-                                <Field type="password" id="password2" name="password2" className='p-[0.5rem] rounded h-[2rem]'/>
+                                <Field type={showPasswords['password2'] ? 'text' : 'password'} id="password2" name="password2" className='p-[0.5rem] rounded h-[2rem]'/>
+                                <div className='flex justify-end bg-slate-500 items-end mr-[0.5rem]'>
+                                    <button className='absolute mb-[0.2rem]' onClick={() => togglePasswordVisibility('password2')} type='button'>
+                                        <FontAwesomeIcon icon={showPasswords['password2'] ? faEye : faEyeSlash} />
+                                    </button>
+                                </div>
                                 <div>
                                     <ErrorMessage name="password2" component="p" className="text-red-500 text-sm absolute " />
                                 </div>
