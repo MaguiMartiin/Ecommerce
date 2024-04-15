@@ -1,0 +1,47 @@
+{
+  "pasos": [
+    {
+      "paso": 1,
+      "descripcion": "CREA O INGRESA A TU CUENTA",
+      "detalles": [
+        "Haz clic en el enlace 'REGISTRATE' ubicado en la esquina superior derecha de la página.",
+        "Completa el formulario con tus datos personales y luego presiona 'Craer cuenta' si aún no tienes una. Si ya tienes cuenta, ingresa tu email y contraseña.",
+        "(Asegúrate de proporcionar información precisa para evitar inconvenientes)."
+      ]
+    },
+    {
+      "paso": 2,
+      "descripcion": "EXPLORA Y SELECCIONA",
+      "detalles": [
+        "Busca y elige tus productos favoritos.", 
+        "Selecciona producto, color, tamaño y cantidad y agrégalos al carrito.",
+        "Una vez listo, agregalo a tu carrito."
+      ]
+    },
+    {
+      "paso": 3,
+      "descripcion": "REVISIÓN DE PEDIDO",
+      "detalles": [
+        "Accede a tu CARRITO haciendo clic en el ícono del carrito en la esquina superior derecha.",
+        "Revisa tu pedido y procede a finalizar la compra."
+      ]
+    },
+    {
+      "paso": 4,
+      "descripcion": "REALIZA EL PAGO DE TU PEDIDO",
+      "detalles": [
+        "Una vez confirmado tu pedido, serás redirigido a nuestra pasarela de pago 100% segura.",
+        "Completa el proceso de pago proporcionando los detalles requeridos.",
+        "Después de completar el pago, recibirás la confirmación y procederemos a coordinar el envío según tu elección de transporte."
+      ]
+    },
+    {
+      "paso": 5,
+      "descripcion": "RECIBE Y DISFRUTA",
+      "detalles": [
+        "Recibirás un correo electrónico con todos los detalles de tu pedido, incluido el número de seguimiento.",
+        "El tiempo de entrega puede variar de 1 a 7 días hábiles dependiendo del método de envío seleccionado."
+      ]
+    }
+  ]
+}
