@@ -15,9 +15,9 @@ const Counter = ({ maxCount, count, onCountChange }) => {
 
   return (
     <div className=' text-base border p-[1rem] flex justify-center '>
-      <button onClick={handleDecrement} className='w-[1.5rem] h-[1.5rem] hover:bg-gray-200 border-gray-400 rounded-full'>-</button>
+      <button onClick={handleDecrement} className='w-[1.5rem] h-[1.5rem] hover:bg-cherry_blossom_pink border-gray-400 rounded-full'>-</button>
       <h1 className='flex justify-center w-[2.5rem]'>{count}</h1>
-      <button onClick={handleIncrement} className='w-[1.5rem] h-[1.5rem] hover:bg-gray-200 border-gray-400 rounded-full'>+</button>
+      <button onClick={handleIncrement} className='w-[1.5rem] h-[1.5rem] hover:bg-cherry_blossom_pink border-gray-400 rounded-full'>+</button>
     </div>
   );
 };

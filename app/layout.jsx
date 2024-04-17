@@ -24,7 +24,7 @@ export default async function RootLayout({ children }) {
   const categories = await fetchCategories()
   return (
     <html lang="en">
-      <body className={`${inter.className}  mx-auto`}>
+      <body className={`${inter.className}  mx-auto bg-white`}>
         <NavBar categories={categories} />
         {children}
       </body>

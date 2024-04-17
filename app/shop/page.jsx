@@ -16,8 +16,8 @@ export default async function Shop () {
                         <div>
                             <img src={product.image} alt={product.name} className=" w-96 h-96 object-cover" />
                             <div className="p-[1rem] mb-[1rem]">   
-                                <h2 className="mb-[0.2rem] text-lg">{product.name}</h2>
-                                <h2 className="text-sm">{product.Categories[0]?.name}</h2>
+                                <h2 className="mb-[0.2rem] text-lg font-semibold">{product.name}</h2>
+                                <h2 className="text-sm font-light">{product.Categories[0]?.name}</h2>
                             </div>
                         </div>                        
                     </Link>

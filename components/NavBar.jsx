@@ -57,15 +57,15 @@ export function NavBar ({categories}) {
     } 
 
     return (
-        <div className="flex p-[2rem] border-b border-red-700 items-center justify-center">
-            <div className="w-1/4 flex justify-center">
-                <Link href="/">ModaVista Boutique</ Link>
+        <div className="flex p-[2rem] border-b border-platinum items-center justify-center bg-platinum text-mountbatten_pink">
+            <div className="w-1/4 flex justify-center text-2xl font-extrabold">
+                <Link href="/">ModaGo</ Link>
             </div>
             <div className="w-3/4 flex justify-center">
                 <nav >
                     <ul className="flex space-x-8">
                         {links.map(({label, route}) => (
-                            <li key={route} className="border-b-2 border-transparent hover:border-red-700 hover:text-red-700 transition-all duration-500" 
+                            <li key={route} className="border-b-2 border-transparent hover:border-black hover:text-black transition-all duration-500" 
                             onMouseEnter={label === 'SHOP' ? handleShopMouseEnter : undefined}
                             onMouseLeave={label === 'SHOP' ? handleShopMouseLeave : undefined}
                             >

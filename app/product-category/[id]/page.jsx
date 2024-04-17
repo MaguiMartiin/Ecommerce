@@ -19,7 +19,7 @@ export default async function ProductCategoryId (query) {
     return(
         <div>   
             <div className="p-[2rem]">
-                <h1 className="flex text-2xl ">{categoryName}</h1>
+                <h1 className="flex text-2xl font-medium ">{categoryName}</h1>
                 <div className=" flex text-sm mt-[0.5rem] space-x-3 items-center">
                     <h1>Inicio</h1>
                     <FontAwesomeIcon icon={faAngleRight} className="w-2" />
@@ -31,7 +31,7 @@ export default async function ProductCategoryId (query) {
                     <Link key={product.id} href='/shop/[id]' as={`/shop/${product.id}`}>
                     <div key={product.id}>
                         <img src={product.image} alt={product.name} className=" w-96 h-96 object-cover" />
-                        <h2 className="flex p-[1rem]">{product.name}</h2>
+                        <h2 className="flex p-[1rem] font-semibold">{product.name}</h2>
                     </div>      
                     </Link> 
                 ))}

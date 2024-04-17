@@ -25,7 +25,7 @@ export function ModalSearch({ categories, handleCloseModal }) {
   }
 
   return (
-    <div className="fixed top-0 left-0 z-50 w-full h-full bg-gray-800 bg-opacity-50 flex justify-end overflow-hidden">
+    <div className="fixed top-0 left-0 z-50 w-full h-full bg-pink bg-opacity-50 flex justify-end overflow-hidden">
       <div className="w-1/4 p-[1rem] bg-white">
         <div className="flex items-center mb-[2rem]">
           <h1 className="text-xl flex-1 text-center">Buscar...</h1>

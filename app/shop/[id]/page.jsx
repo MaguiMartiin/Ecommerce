@@ -15,10 +15,10 @@ export default async function ShopId ({params}) {
             <div className="w-1/2 flex justify-end">
                 <img src={productId.image} alt={productId.name} className="w-1/2" />
             </div>
-            <div className="w-1/2 mt-[1.5rem] ml-[3rem]">
+            <div className="w-1/2 mt-[1.5rem] ml-[3rem] font-light">
                 <h2>{productId.Categories[0]?.name}</h2>
-                <h1 className="text-3xl">{productId.name}</h1>
-                <h2 className="text-2xl mt-[1rem]">${productId.price}</h2>
+                <h1 className="text-3xl font-semibold">{productId.name}</h1>
+                <h2 className="text-2xl mt-[0.5rem] text-cherry_blossom_pink font-extrabold">${productId.price}</h2>
                 <h3 className="mt-[2rem]">{productId.description}</h3>
                 <div className="mt-[3rem]">    
                     <SizeColorList stock={productId.stock}/>
