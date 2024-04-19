@@ -79,10 +79,12 @@ export function NavBar ({categories}) {
                     
                 </nav>
             </div>
-            <div className="flex w-1/4 text-lg justify-center space-x-6">
+            <div className="flex w-1/4 text-lg justify-center space-x-6 items-center">
                 {modalSearchVisible && <ModalSearch categories={categories} handleCloseModal={handleCloseModal}/>}
                 <FontAwesomeIcon icon={faSearch} className="w-4 cursor-pointer" onClick={handleOpenModalSearch} />
-                <FontAwesomeIcon icon={faUser} className="w-4 cursor-pointer" />
+                <Link href='/login'>
+                    <FontAwesomeIcon icon={faUser} className="w-4 cursor-pointer" />
+                </Link>
                 <FontAwesomeIcon icon={faCartShopping} className="w-4 cursor-pointer" />
             </div>
         </div>
