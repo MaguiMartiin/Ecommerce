@@ -23,15 +23,14 @@ export default function Login() {
 
     const register = async  (values) => {
         try {
-            const response = await axios.post('http://localhost:3001/users', {
+            await axios.post('http://localhost:3001/users', {
                 name: values.name, 
                 email: values.email,
                 password: values.password2
             })
-            window.alert('Usuario creado exitosamente');
-            console.log('Respuesta del servidor:', response.data);
+            alert('Cuenta creada exitosamente');
         } catch (error) {
-            throw new Error(error.message)
+            alert(error.response?.data?.error || 'Error al crear cuenta. Por favor, intenta nuevamente.')
         }
     };
 
