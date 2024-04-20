@@ -7,7 +7,8 @@ import axios from 'axios';
 
 
 export default function Login() {
-    const [showPasswords, setShowPasswords] = useState({})
+    const [showPasswords, setShowPasswords] = useState({});
+
     const login = async (values) => {
         try {
             const response = await axios.post('http://localhost:3001/users/login', {
@@ -18,7 +19,21 @@ export default function Login() {
         } catch (error) {
             throw new Error(error.message);
         }
-    }
+    };
+
+    const register = async  (values) => {
+        try {
+            const response = await axios.post('http://localhost:3001/users', {
+                name: values.name, 
+                email: values.email,
+                password: values.password2
+            })
+            window.alert('Usuario creado exitosamente');
+            console.log('Respuesta del servidor:', response.data);
+        } catch (error) {
+            throw new Error(error.message)
+        }
+    };
 
     const togglePasswordVisibility = (fieldName) => {
         setShowPasswords((prevShowPasswords) => ({
@@ -83,7 +98,10 @@ export default function Login() {
 
             <div className='bg-slate-200 w-1/3 p-[2rem] rounded '>
                 <h1 className='text-2xl mb-[2rem]'>Crear cuenta</h1>
-                <Formik onSubmit={() => {console.log('Formulario enviado');}}
+                <Formik onSubmit={(values, { setSubmitting }) => {
+                        register(values);
+                        setSubmitting(false);
+                    }}
                         initialValues={{name: '', email: '', password1: '', password2: ''}}
                         validate={(values) => {
                             const errors = {}
