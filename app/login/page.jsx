@@ -15,7 +15,6 @@ export default function Login() {
                 email: values.email,
                 password: values.password
             })
-            console.log('Respuesta del servidor:', response.data);
         } catch (error) {
             throw new Error(error.message);
         }

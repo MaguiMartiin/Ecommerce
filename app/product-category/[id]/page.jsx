@@ -2,6 +2,7 @@ import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 
 export default async function ProductCategoryId (query) {
     const categoryId = query.params.id
@@ -16,6 +17,8 @@ export default async function ProductCategoryId (query) {
     const products = await fetchProductCategory(categoryId)
     const categoryName = products.length > 0 ? products[0].Categories[0]?.name : '';
 
+    if (products.length === 0) {notFound()}
+    
     return(
         <div>   
             <div className="p-[2rem]">
