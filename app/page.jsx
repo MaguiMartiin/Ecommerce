@@ -1,14 +1,7 @@
-import axios from "axios"
+'use client'
 import Link from "next/link";
+import { fetchCategories } from "./axios";
 
-const fetchCategories = async () => {
-  try {
-    return (await axios.get('http://localhost:3001/categories')).data;
-  } catch (error) {
-    console.error('Error en fetchCategories:', error);
-    throw new Error(error.message);
-  }
-};
 export default async function Home() {
   const categories = await fetchCategories()
 

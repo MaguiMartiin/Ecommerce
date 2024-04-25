@@ -1,10 +1,5 @@
-import axios from "axios"
 import Link from "next/link";
-
-const fetchProducts = async () => {
-    try { return (await axios.get('http://localhost:3001/products')).data;
-    } catch (error) { throw new Error(error.message)}
-};
+import { fetchProducts } from "../axios";
 
 export default async function Shop () {
     const products = await fetchProducts()

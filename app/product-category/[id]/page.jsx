@@ -1,4 +1,4 @@
-import axios from "axios";
+import { fetchProductCategory } from "@/app/axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
@@ -6,14 +6,6 @@ import { notFound } from "next/navigation";
 
 export default async function ProductCategoryId (query) {
     const categoryId = query.params.id
-    const fetchProductCategory = async (id) => {
-        try {
-          return (await axios.get(`http://localhost:3001/categories/?categoryId=${id}`)).data;
-        } catch (error) {
-          console.error('Error en fetchProductCategory:', error);
-          throw new Error(error.message);
-        }
-    }
     const products = await fetchProductCategory(categoryId)
     const categoryName = products.length > 0 ? products[0].Categories[0]?.name : '';
 

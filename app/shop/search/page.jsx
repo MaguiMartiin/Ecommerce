@@ -1,17 +1,5 @@
-import axios from "axios"
 import Link from "next/link"
-
-const fetchProductSearch = async (name) => {
-    try {
-        return (await axios.get(`http://localhost:3001/products/?name=${name}`)).data
-    } catch (error) { throw new Error(error.message)}
-}
-
-const fetchProductSearchCategory = async (id, name) => {
-    try {
-        return (await axios.get(`http://localhost:3001/categories/?categoryId=${id}&name=${name}`)).data
-    } catch (error) { throw new Error(error.message)}
-}
+import { fetchProductSearch, fetchProductSearchCategory } from "@/app/axios"
 
 export default async function Search (query) {
     const {name} = query.searchParams
