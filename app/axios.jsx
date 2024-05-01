@@ -1,4 +1,5 @@
 import axios from "axios";
+import { notFound } from "next/navigation";
 
 export const fetchProducts = async () => {
   try { return (await axios.get('http://localhost:3001/products')).data;
@@ -16,7 +17,7 @@ export const fetchProductCategory = async (id) => {
 
 export const fetchProductId = async (id) => {
   try { return (await axios.get(`http://localhost:3001/products/${id}`)).data;
-  } catch (error) { throw new Error(error.message)}
+  } catch (error) {notFound()}
 };
 
 export const fetchCategories = async () => {
