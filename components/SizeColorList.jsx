@@ -10,7 +10,6 @@ const SizeColorList = ({  product }) => {
     const [selectedColor, setSelectedColor] = useState(null)
     const [count, setCount] = useState(1)
     const {state, dispatch} = useContext(Store)
-    console.log(state.product.productItems);
 
     const handleSizeButtonClick = (size) => {
         setSelectedSize(size)
@@ -23,23 +22,14 @@ const SizeColorList = ({  product }) => {
     }
 
     const isAvailable = (size, color) => {
-        const available = product.stock.find((item) => item.size === size && item.color === color && item.quantity > 0)
-        return !!available
+        return !!product.stock.find(item => item.size === size && item.color === color && item.quantity > 0)
     }   
 
-const handleAddToCart = () => {
-    if (selectedSize && selectedColor) {
-        // Buscar dentro de mi producto, el stock correspondiente a mi color y tamaño
-        const item = product.stock.find(item => item.size === selectedSize && item.color === selectedColor);
-        
-        if (item) {
-            // Buscar dentro de mi carrito, si ya tengo ese mismo producto 
-            const cartItem = state.product.productItems.find(i => i.id === product.id && i.size === selectedSize && i.color === selectedColor);
+    const handleAddToCart = () => {
+        if (selectedSize && selectedColor) {
+            const item = product.stock.find(item => item.size === selectedSize && item.color === selectedColor);
             
-            // Si ya tengo el mismo producto, guardo la cantidad seleccionada sino 0
-            const currentCartQuantity = cartItem ? cartItem.quantity : 0;
-
-            if ((item.quantity - currentCartQuantity) >= count) {
+            if (item && (item.quantity - (state.product.productItems.find(i => i.id === product.id && i.size === selectedSize && i.color === selectedColor)?.quantity || 0)) >= count) {
                 dispatch({
                     type: 'ADD_PRODUCT',
                     payload: {
@@ -53,12 +43,12 @@ const handleAddToCart = () => {
                         maxQuantity: item.quantity
                     }
                 });
+                alert('Producto agregado al carrito');
             } else {
                 alert('Cantidad no disponible en stock');
             }
         }
     }
-};
 
     const handleCountChange = (newCount) => {
         setCount(newCount)
@@ -90,8 +80,18 @@ const handleAddToCart = () => {
                 </button>
             ))}
 
-            <div className='h-[6rem] '>
-                {(selectedSize && selectedColor && !isAvailable(selectedSize, selectedColor)) && (
+            <div className='h-[6rem] absolute '>
+                {(!selectedSize || !selectedColor || isAvailable(selectedSize, selectedColor)) ? (
+                    <div className='flex mt-[1rem] items-center space-x-11'>
+                        <div className='flex mt-[1.5rem]'>
+                        <Counter  maxCount={getMaxCount()} count={count} onCountChange={handleCountChange} />
+                        </div>
+                        <button className="bg-cherry_blossom_pink text-white p-[1rem] rounded-lg flex mt-[1.5rem] font-semibold " onClick={handleAddToCart} disabled={!selectedSize || !selectedColor || !isAvailable(selectedSize, selectedColor)}>
+                            Agregar al carrito
+                            <FontAwesomeIcon icon={faCartShopping} className='p-[0.2rem] ml-[0.5rem] w-6' />
+                        </button>
+                    </div>
+                ) : 
                 <div className='flex items-center space-x-11'>
                     <div className='flex mt-[2.5rem]'>
                         <Counter  maxCount={getMaxCount()} count={count} onCountChange={handleCountChange} />
@@ -104,18 +104,7 @@ const handleAddToCart = () => {
                         </button>
                     </div>
                 </div>
-                )}
-                {(!selectedSize || !selectedColor || isAvailable(selectedSize, selectedColor)) && (
-                    <div className='flex mt-[1rem] items-center space-x-11'>
-                        <div className='flex mt-[1.5rem]'>
-                        <Counter  maxCount={getMaxCount()} count={count} onCountChange={handleCountChange} />
-                        </div>
-                        <button className="bg-champagne_pink text-mountbatten_pink p-[1rem] rounded-lg flex mt-[1.5rem] font-semibold " onClick={handleAddToCart} disabled={!selectedSize || !selectedColor || !isAvailable(selectedSize, selectedColor)}>
-                            Agregar al carrito
-                            <FontAwesomeIcon icon={faCartShopping} className='p-[0.2rem] ml-[0.5rem] w-6' />
-                        </button>
-                    </div>
-                )}
+                }
             </div>
         </div>
     )

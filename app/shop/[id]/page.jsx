@@ -8,7 +8,7 @@ export default async function ShopId ({params}) {
     return(
         <div className="flex">   
             <div className="w-1/2 flex justify-end">
-                <img src={productId.image} alt={productId.name} className="w-1/2" />
+                <img src={productId.image} alt={productId.name} className="w-1/2 h-[35rem] object-cover" />
             </div>
             <div className="w-1/2 mt-[1.5rem] ml-[3rem] font-light">
                 <h2>{productId.Categories[0]?.name}</h2>
