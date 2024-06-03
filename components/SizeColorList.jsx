@@ -1,13 +1,16 @@
 'use client'
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import Counter from './CounterQuantity';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons"
+import { Store } from './Store';
 
-const SizeColorList = ({ stock }) => {
+const SizeColorList = ({  product }) => {
     const [selectedSize, setSelectedSize] = useState(null)
     const [selectedColor, setSelectedColor] = useState(null)
     const [count, setCount] = useState(1)
+    const {state, dispatch} = useContext(Store)
+    console.log(state.product.productItems);
 
     const handleSizeButtonClick = (size) => {
         setSelectedSize(size)
@@ -20,13 +23,42 @@ const SizeColorList = ({ stock }) => {
     }
 
     const isAvailable = (size, color) => {
-        const available = stock.find((item) => item.size === size && item.color === color && item.quantity > 0)
+        const available = product.stock.find((item) => item.size === size && item.color === color && item.quantity > 0)
         return !!available
-    }
+    }   
 
-    const handleAddToCart = () => {
-        console.log(`Agregado al carrito: Talle ${selectedSize} - Color ${selectedColor} - ${count}`)
+const handleAddToCart = () => {
+    if (selectedSize && selectedColor) {
+        // Buscar dentro de mi producto, el stock correspondiente a mi color y tamaño
+        const item = product.stock.find(item => item.size === selectedSize && item.color === selectedColor);
+        
+        if (item) {
+            // Buscar dentro de mi carrito, si ya tengo ese mismo producto 
+            const cartItem = state.product.productItems.find(i => i.id === product.id && i.size === selectedSize && i.color === selectedColor);
+            
+            // Si ya tengo el mismo producto, guardo la cantidad seleccionada sino 0
+            const currentCartQuantity = cartItem ? cartItem.quantity : 0;
+
+            if ((item.quantity - currentCartQuantity) >= count) {
+                dispatch({
+                    type: 'ADD_PRODUCT',
+                    payload: {
+                        id: product.id,
+                        name: product.name,
+                        price: product.price,
+                        image: product.image,
+                        size: selectedSize,
+                        color: selectedColor,
+                        quantity: count,
+                        maxQuantity: item.quantity
+                    }
+                });
+            } else {
+                alert('Cantidad no disponible en stock');
+            }
+        }
     }
+};
 
     const handleCountChange = (newCount) => {
         setCount(newCount)
@@ -34,14 +66,14 @@ const SizeColorList = ({ stock }) => {
 
     const getMaxCount = () => {
         if (selectedSize && selectedColor) {
-            const item = stock.find((item) => item.size === selectedSize && item.color === selectedColor)
+            const item = product.stock.find((item) => item.size === selectedSize && item.color === selectedColor)
             return item ? item.quantity : 0
         }
         return 0
     }
 
-    const uniqueSizes = [...new Set(stock.map(item => item.size))]
-    const uniqueColors = [...new Set(stock.map(item => item.color))]
+    const uniqueSizes = [...new Set(product.stock.map(item => item.size))]
+    const uniqueColors = [...new Set(product.stock.map(item => item.color))]
 
     return (
         <div>

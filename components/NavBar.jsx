@@ -1,10 +1,12 @@
 'use client'
 import Link from "next/link"
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { ModalCategories } from "./ModalCategories"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faSearch, faUser, faCartShopping } from "@fortawesome/free-solid-svg-icons"
 import { ModalSearch } from "./ModalSearch"
+import { useContext } from "react"
+import { Store } from "./Store"
 
 const links = [{
     label: 'SHOP',
@@ -24,6 +26,14 @@ const links = [{
 export function NavBar ({categories}) {
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [modalSearchVisible, setModalSearchVisible] = useState(false)
+
+    const {state, dispatch} = useContext(Store)
+    const {product} = state
+    const [productItemsCount, setProductItemsCount] = useState(0)
+
+    useEffect(()=> {
+        setProductItemsCount(product.productItems.reduce((a,c) => a + c.quantity, 0))
+    }, [product.productItems])
 
     const handleShopMouseEnter = () => {
         setIsModalVisible(true);
@@ -57,7 +67,7 @@ export function NavBar ({categories}) {
     } 
 
     return (
-        <div className="flex p-[2rem] border-b border-platinum items-center justify-center bg-platinum text-mountbatten_pink">
+        <div className="flex p-[2rem] items-center justify-center bg-cherry_blossom_pink text-black h-[5rem]">
             <div className="w-1/4 flex justify-center text-2xl font-extrabold">
                 <Link href="/">ModaGo</ Link>
             </div>
@@ -81,11 +91,14 @@ export function NavBar ({categories}) {
             </div>
             <div className="flex w-1/4 text-lg justify-center space-x-6 items-center">
                 {modalSearchVisible && <ModalSearch categories={categories} handleCloseModal={handleCloseModal}/>}
-                <FontAwesomeIcon icon={faSearch} className="w-4 cursor-pointer" onClick={handleOpenModalSearch} />
+                <FontAwesomeIcon icon={faSearch} className="w-5 cursor-pointer" onClick={handleOpenModalSearch} />
                 <Link href='/login'>
-                    <FontAwesomeIcon icon={faUser} className="w-4 cursor-pointer" />
+                    <FontAwesomeIcon icon={faUser} className="w-5 cursor-pointer" />
                 </Link>
-                <FontAwesomeIcon icon={faCartShopping} className="w-4 cursor-pointer" />
+                <div className="flex justify-center items-center text-center">
+                    <FontAwesomeIcon icon={faCartShopping} className="w-5 cursor-pointer" />
+                    <span className="flex justify-center items-center w-5 h-5 text-white text-[10px] bg-black rounded-full -ml-[0.5rem] mb-[1rem] ">{productItemsCount}</span>
+                </div>
             </div>
         </div>
     )

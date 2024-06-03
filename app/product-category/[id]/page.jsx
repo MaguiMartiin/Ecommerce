@@ -1,4 +1,4 @@
-import { fetchProductCategory } from "@/app/axios";
+import { fetchProductCategory } from "../../axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";

@@ -2,6 +2,7 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 import { NavBar } from '../components/NavBar'
 import { fetchCategories } from './axios'
+import { StoreProvider } from '../components/Store'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -13,11 +14,13 @@ export const metadata = {
 export default async function RootLayout({ children }) {
   const categories = await fetchCategories()
   return (
-    <html lang="en">
-      <body className={`${inter.className}  mx-auto bg-white`}>
-        <NavBar categories={categories} />
-        {children}
-      </body>
-    </html>
+    <StoreProvider>
+      <html lang="en">
+        <body className={`${inter.className}  mx-auto bg-white`}>
+          <NavBar categories={categories} />
+          {children}
+        </body>
+      </html>
+    </StoreProvider>
   )
 }

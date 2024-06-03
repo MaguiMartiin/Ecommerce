@@ -1,4 +1,4 @@
-import { fetchProductId } from "@/app/axios";
+import { fetchProductId } from "../../axios";
 import SizeColorList from "../../../components/SizeColorList";
 
 export default async function ShopId ({params}) {
@@ -16,7 +16,7 @@ export default async function ShopId ({params}) {
                 <h2 className="text-2xl mt-[0.5rem] text-cherry_blossom_pink font-extrabold">${productId.price}</h2>
                 <h3 className="mt-[2rem]">{productId.description}</h3>
                 <div className="mt-[3rem]">    
-                    <SizeColorList stock={productId.stock}/>
+                    <SizeColorList product={productId}/>
                 </div>
             </div>
         </div>
