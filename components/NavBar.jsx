@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faSearch, faUser, faCartShopping } from "@fortawesome/free-solid-svg-icons"
 import { ModalSearch } from "./ModalSearch"
 import { useContext } from "react"
-import { Store } from "./Store"
+import { Store, useUIStore } from "./Store"
 
 const links = [{
     label: 'SHOP',
@@ -26,6 +26,7 @@ const links = [{
 export function NavBar ({categories}) {
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [modalSearchVisible, setModalSearchVisible] = useState(false)
+    const {openSideCart }= useUIStore();
 
     const {state, dispatch} = useContext(Store)
     const {product} = state
@@ -67,7 +68,7 @@ export function NavBar ({categories}) {
     } 
 
     return (
-        <div className="flex p-[2rem] items-center justify-center bg-cherry_blossom_pink text-black h-[5rem]">
+        <div className="flex p-[2rem] items-center justify-center bg-cherry_blossom_pink text-black h-[5rem] fixed w-screen">
             <div className="w-1/4 flex justify-center text-2xl font-extrabold">
                 <Link href="/">ModaGo</ Link>
             </div>
@@ -89,14 +90,14 @@ export function NavBar ({categories}) {
                     
                 </nav>
             </div>
-            <div className="flex w-1/4 text-lg justify-center space-x-6 items-center">
+            <div className="flex w-1/4 text-lg justify-center space-x-4 items-center">
                 {modalSearchVisible && <ModalSearch categories={categories} handleCloseModal={handleCloseModal}/>}
-                <FontAwesomeIcon icon={faSearch} className="w-5 cursor-pointer" onClick={handleOpenModalSearch} />
+                <FontAwesomeIcon icon={faSearch} className="w-5 h-4 flex items-center cursor-pointer" onClick={handleOpenModalSearch} />
                 <Link href='/login'>
-                    <FontAwesomeIcon icon={faUser} className="w-5 cursor-pointer" />
+                    <FontAwesomeIcon icon={faUser} className="w-5 h-4 cursor-pointer  flex items-center" />
                 </Link>
                 <div className="flex justify-center items-center text-center">
-                    <FontAwesomeIcon icon={faCartShopping} className="w-5 cursor-pointer" />
+                    <FontAwesomeIcon icon={faCartShopping} className="w-5 h-4  flex items-center cursor-pointer" onClick={ openSideCart } />
                     <span className="flex justify-center items-center w-5 h-5 text-white text-[10px] bg-black rounded-full -ml-[0.5rem] mb-[1rem] ">{productItemsCount}</span>
                 </div>
             </div>

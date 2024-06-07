@@ -1,11 +1,14 @@
 'use client'
-import { useReducer, createContext } from "react";
+import { useReducer, createContext, useContext } from "react";
 
 export const Store = createContext()
 
 const initialState = {
     product: {
         productItems: []    
+    },
+    ui: {
+        isSideCartOpen: false,
     }
 }
 
@@ -28,6 +31,9 @@ function reducer (state, action){
                 return { ...state, product: { ...state.product, productItems } };
             }
         }
+        case 'SET_SIDE_CART_OPEN': {
+            return { ...state, ui: { ...state.ui, isSideCartOpen: action.payload } };
+        }
     
         default:
             return state
@@ -38,4 +44,18 @@ export function StoreProvider({children}){
     const [state, dispatch] = useReducer(reducer, initialState)
     const value = {state, dispatch}
     return <Store.Provider value={value}>{children}</Store.Provider>
+}
+
+export function useUIStore() {
+    const { state, dispatch } = useContext(Store);
+
+    const setSideMenuOpen = (isOpen) => {
+        dispatch({ type: 'SET_SIDE_CART_OPEN', payload: isOpen });
+    };
+
+    return {
+        isSideCartOpen: state.ui.isSideCartOpen,
+        openSideCart: () => setSideMenuOpen(true),
+        closeSideCart: () => setSideMenuOpen(false)
+    };
 }

@@ -3,6 +3,7 @@ import './globals.css'
 import { NavBar } from '../components/NavBar'
 import { fetchCategories } from './axios'
 import { StoreProvider } from '../components/Store'
+import { SideCart } from '@/components/SideCart'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -18,6 +19,7 @@ export default async function RootLayout({ children }) {
       <html lang="en">
         <body className={`${inter.className}  mx-auto bg-white`}>
           <NavBar categories={categories} />
+          <SideCart />
           {children}
         </body>
       </html>

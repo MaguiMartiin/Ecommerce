@@ -41,7 +41,7 @@ export default function Login() {
     }
 
     return (
-        <div className="flex justify-center items-start space-x-[5rem] p-[3rem]">
+        <div className="flex justify-center items-start space-x-[5rem] p-[3rem] pt-[8rem]">
             <div className='bg-slate-200 w-1/3 p-[2rem] rounded '>
                 <h1 className='text-2xl mb-[2rem]'>Ingresar</h1>
                 <Formik onSubmit={(values, { setSubmitting }) => {
