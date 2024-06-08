@@ -13,7 +13,7 @@ export default async function Search (query) {
     }
     
     return(
-        <div className=" items-center">
+        <div className=" items-center pt-[5rem]">
             {products.length === 0 ? (
                 <p className="p-[2rem] text-xl ">No se encontraron productos para "{name}".</p>
             ) : (

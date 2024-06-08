@@ -9,6 +9,7 @@ const initialState = {
     },
     ui: {
         isSideCartOpen: false,
+        isModalSearchOpen: false,
     }
 }
 
@@ -34,7 +35,9 @@ function reducer (state, action){
         case 'SET_SIDE_CART_OPEN': {
             return { ...state, ui: { ...state.ui, isSideCartOpen: action.payload } };
         }
-    
+        case 'SET_MODAL_SEARCH_OPEN': { // Nueva acción para abrir/cerrar ModalSearch
+            return { ...state, ui: { ...state.ui, isModalSearchOpen: action.payload } };
+        }
         default:
             return state
     }
@@ -53,9 +56,16 @@ export function useUIStore() {
         dispatch({ type: 'SET_SIDE_CART_OPEN', payload: isOpen });
     };
 
+    const setModalSearchOpen = (isOpen) => {
+        dispatch({ type: 'SET_MODAL_SEARCH_OPEN', payload: isOpen });
+    };
+
     return {
         isSideCartOpen: state.ui.isSideCartOpen,
         openSideCart: () => setSideMenuOpen(true),
-        closeSideCart: () => setSideMenuOpen(false)
+        closeSideCart: () => setSideMenuOpen(false),
+        isModalSearchOpen: state.ui.isModalSearchOpen, 
+        openModalSearch: () => setModalSearchOpen(true), 
+        closeModalSearch: () => setModalSearchOpen(false)
     };
 }

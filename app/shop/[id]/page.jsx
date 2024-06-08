@@ -6,7 +6,7 @@ export default async function ShopId ({params}) {
     const productId = await fetchProductId(id)
     
     return(
-        <div className="flex">   
+        <div className="flex pt-[5rem]">   
             <div className="w-1/2 flex justify-end">
                 <img src={productId.image} alt={productId.name} className="w-1/2 h-[35rem] object-cover" />
             </div>

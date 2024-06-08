@@ -4,7 +4,7 @@ import Link from "next/link"
 
 export default function PageNotFound () {
     return(
-        <div className="flex flex-col items-center font-bold p-[3rem] mt-[5rem]">
+        <div className="flex flex-col items-center font-bold p-[3rem] pt-[10rem]">
             <div className="flex items-center space-x-2">
                 <FontAwesomeIcon icon={faExclamationTriangle} color="black" size="2xl"/>
                 <h1 className="text-7xl font-bold">404</h1>

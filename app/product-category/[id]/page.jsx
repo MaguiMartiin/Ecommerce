@@ -13,7 +13,7 @@ export default async function ProductCategoryId (query) {
     
     return(
         <div>   
-            <div className="p-[2rem]">
+            <div className="p-[2rem] pt-[7rem]">
                 <h1 className="flex text-2xl font-medium ">{categoryName}</h1>
                 <div className=" flex text-sm mt-[0.5rem] space-x-3 items-center">
                     <h1>Inicio</h1>
