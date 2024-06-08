@@ -68,7 +68,7 @@ export function NavBar ({categories}) {
     } 
 
     return (
-        <div className="flex p-[2rem] items-center justify-center bg-cherry_blossom_pink text-black h-[5rem] fixed w-screen">
+        <div className="flex p-[2rem] items-center justify-center bg-cherry_blossom_pink text-black h-[5rem] fixed w-screen z-10">
             <div className="w-1/4 flex justify-center text-2xl font-extrabold">
                 <Link href="/">ModaGo</ Link>
             </div>

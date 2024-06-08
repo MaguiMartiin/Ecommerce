@@ -1,4 +1,3 @@
-'use client'
 import Link from "next/link";
 import { fetchCategories } from "./axios";
 
@@ -15,7 +14,7 @@ export default async function Home() {
               {category.Products.slice(0,1).map(product => (
                   <div className="flex flex-col" key={product.id}>
                     <img src={product.image} alt={product.name} className="w-full h-[50rem] object-cover"/>
-                    <h1 className="flex p-[3rem] absolute text-white font-bold text-4xl">{category.name}</h1>
+                    <h1 className="flex p-[3rem] absolute text-white font-bold text-4xl mt-[5rem]">{category.name}</h1>
                   </div>
               ))}
             </div>
