@@ -10,7 +10,7 @@ export function ModalSearch({ categories}) {
   useEffect(() => {
     if(isModalSearchOpen) {document.body.classList.add("modal-open")}
     else {document.body.classList.remove("modal-open")}
-  })
+  }, [isModalSearchOpen])
 
   const [selectedCategory, setSelectedCategory] = useState("default")
   const [searchText, setSearchText] = useState("")

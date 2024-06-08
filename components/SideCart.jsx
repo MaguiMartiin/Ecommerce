@@ -9,7 +9,7 @@ export const SideCart = () => {
     useEffect(() => {
         if(isSideCartOpen) {document.body.classList.add("modal-open")}
         else {document.body.classList.remove("modal-open")}
-    })
+    }, [isSideCartOpen])
 
     return (
         <div>
