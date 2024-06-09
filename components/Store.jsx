@@ -32,6 +32,16 @@ function reducer (state, action){
                 return { ...state, product: { ...state.product, productItems } };
             }
         }
+        case 'CHANGE_QUANTITY': {
+            const { id, size, color, newQuantity } = action.payload
+            const updatedProductItems = state.product.productItems.map(item => {
+                if (item.id === id && item.size === size && item.color === color) {
+                    return { ...item, quantity: newQuantity }
+                }
+                return item
+            })
+            return { ...state, product: { ...state.product, productItems: updatedProductItems } };
+        }
         case 'SET_SIDE_CART_OPEN': {
             return { ...state, ui: { ...state.ui, isSideCartOpen: action.payload } };
         }
