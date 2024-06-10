@@ -94,7 +94,7 @@ const SizeColorList = ({  product }) => {
                 ) : 
                 <div className='flex items-center space-x-11'>
                     <div className='flex mt-[2.5rem]'>
-                        <Counter  maxCount={getMaxCount()} count={count} onCountChange={handleCountChange} />
+                        <Counter  maxCount={getMaxCount()} count={count} onCountChange={handleCountChange}/>
                     </div>
                     <div className='flex flex-col'>
                         <p className="text-red-500 mb-[1rem] ">Sin stock</p>

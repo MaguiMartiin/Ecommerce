@@ -1,7 +1,6 @@
 'use client'
 import clsx from 'clsx'
-import React, { useEffect, useState } from 'react';
-import { useContext } from "react"
+import React, { useEffect, useContext } from 'react';
 import { Store, useUIStore } from "./Store";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
@@ -50,11 +49,19 @@ export const SideCart = () => {
                         {product.productItems.map((item) => (
                             <div key={item.id} className='flex p-[1rem] border-b-2'>
                                 <img src={item.image} alt={item.name} className=' w-1/3 h-2/3' />
-                                <div className='flex flex-col p-[1rem] justify-center'>
-                                    <h1>{item.name} - {item.size}</h1>
-                                    <h2>{item.color}</h2>
-                                    <p>{item.price}</p>
-                                    <Counter  maxCount={item.maxQuantity} count={item.quantity} onCountChange={(newCount) => handleChangeQuantity(item.id, item.size, item.color, newCount)}/>
+                                <div className='flex flex-col p-[1rem] w-full space-y-6 justify-center'>
+                                    <div>
+                                        <h1>{item.name} - {item.size}</h1>
+                                        <h2>{item.color}</h2>
+                                        <p>{item.price}</p>
+                                    </div>
+                                    <div className='flex justify-between'>
+                                        <Counter  maxCount={item.maxQuantity} count={item.quantity} onCountChange={(newCount) => handleChangeQuantity(item.id, item.size, item.color, newCount)} w={'100px'} h={'50px'} />
+                                        <div className='flex items-center space-x-2'>
+                                            <FontAwesomeIcon icon={faXmark} className="ml-auto w-3 cursor-pointer" />
+                                            <h1>Eliminar </h1>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         ))}
