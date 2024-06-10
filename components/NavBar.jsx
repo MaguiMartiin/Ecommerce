@@ -83,10 +83,10 @@ export function NavBar ({categories}) {
                 <Link href='/login'>
                     <FontAwesomeIcon icon={faUser} className="w-5 h-4 cursor-pointer  flex items-center" />
                 </Link>
-                <div className="flex justify-center items-center text-center">
-                    <FontAwesomeIcon icon={faCartShopping} className="w-5 h-4  flex items-center cursor-pointer" onClick={ openSideCart } />
+                <button className="flex justify-center items-center text-center" onClick={ openSideCart } >
+                    <FontAwesomeIcon icon={faCartShopping} className="w-5 h-4  flex items-center cursor-pointer"/>
                     <span className="flex justify-center items-center w-5 h-5 text-white text-[10px] bg-black rounded-full -ml-[0.5rem] mb-[1rem] ">{productItemsCount}</span>
-                </div>
+                </button>
             </div>
         </div>
     )
