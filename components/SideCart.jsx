@@ -23,6 +23,13 @@ export const SideCart = () => {
         })
     }
 
+    const handleDeleteProduct = (id, size, color) => {
+        dispatch({
+            type: 'DELETE_PRODUCT', 
+            payload: {id, size, color}
+        })
+    }
+
     return (
         <div>
             {isSideCartOpen && 
@@ -55,11 +62,13 @@ export const SideCart = () => {
                                         <h2>{item.color}</h2>
                                         <p>{item.price}</p>
                                     </div>
-                                    <div className='flex justify-between'>
+                                    <div className='flex justify-between items-center'>
                                         <Counter  maxCount={item.maxQuantity} count={item.quantity} onCountChange={(newCount) => handleChangeQuantity(item.id, item.size, item.color, newCount)} w={'100px'} h={'50px'} />
-                                        <div className='flex items-center space-x-2'>
-                                            <FontAwesomeIcon icon={faXmark} className="ml-auto w-3 cursor-pointer" />
-                                            <h1>Eliminar </h1>
+                                        <div>
+                                            <button className='flex items-center space-x-2' onClick={() => handleDeleteProduct(item.id, item.size, item.color)} >
+                                                <FontAwesomeIcon icon={faXmark} className="ml-auto w-3 cursor-pointer" />
+                                                <h1>Eliminar </h1>
+                                            </button>
                                         </div>
                                     </div>
                                 </div>

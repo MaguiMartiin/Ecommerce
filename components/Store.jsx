@@ -19,7 +19,6 @@ function reducer (state, action){
             const newItem = action.payload
             const existItem = state.product.productItems.find(item => item.id === newItem.id && item.size === newItem.size && item.color === newItem.color )   
             if (existItem) {
-                // Si el elemento ya existe, solo actualizamos la cantidad
                 const productItems = state.product.productItems.map(item =>
                     item.id === existItem.id && item.size === existItem.size && item.color === existItem.color
                         ? { ...item, quantity: item.quantity + newItem.quantity }
@@ -27,11 +26,11 @@ function reducer (state, action){
                 );
                 return { ...state, product: { ...state.product, productItems } };
             } else {
-                // Si no existe, agregamos el nuevo elemento
                 const productItems = [...state.product.productItems, newItem];
                 return { ...state, product: { ...state.product, productItems } };
             }
         }
+
         case 'CHANGE_QUANTITY': {
             const { id, size, color, newQuantity } = action.payload
             const updatedProductItems = state.product.productItems.map(item => {
@@ -42,12 +41,21 @@ function reducer (state, action){
             })
             return { ...state, product: { ...state.product, productItems: updatedProductItems } };
         }
+
+        case 'DELETE_PRODUCT': {
+            const { id, size, color } = action.payload;
+            const updatedProductItems = state.product.productItems.filter(item => !(item.id === id && item.size === size && item.color === color));
+            return { ...state, product: { ...state.product, productItems: updatedProductItems } };
+        }
+
         case 'SET_SIDE_CART_OPEN': {
             return { ...state, ui: { ...state.ui, isSideCartOpen: action.payload } };
         }
-        case 'SET_MODAL_SEARCH_OPEN': { // Nueva acción para abrir/cerrar ModalSearch
+
+        case 'SET_MODAL_SEARCH_OPEN': {
             return { ...state, ui: { ...state.ui, isModalSearchOpen: action.payload } };
         }
+        
         default:
             return state
     }
