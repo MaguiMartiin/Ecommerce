@@ -5,6 +5,7 @@ import { Store, useUIStore } from "./Store";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import Counter from './CounterQuantity';
+import Link from 'next/link';
 
 export const SideCart = () => {
     const {state, dispatch} = useContext(Store)
@@ -59,7 +60,15 @@ export const SideCart = () => {
                         <FontAwesomeIcon icon={faXmark} className="ml-auto w-3 cursor-pointer" onClick={closeSideCart} />
                     </div>
                     <div className='overflow-y-auto h-2/3 w-full'>
-                        {product.productItems.map((item) => (
+                        {product.productItems.length === 0 ? (
+                            <div className="flex flex-col items-center justify-center h-full ">
+                                <h1 className='mb-[2rem]'>Tu carrito está vacío</h1>
+                                <Link href='/shop' className='w-full flex justify-center mb-[2rem]'>
+                                    <button className="bg-cherry_blossom_pink text-white p-[1rem] rounded w-3/4" onClick={closeSideCart}>Continua comprando</button>
+                                </Link>
+                            </div>
+                        ) : (
+                            product.productItems.map((item) => (
                             <div key={item.id} className='flex p-[1rem] border-b-2'>
                                 <img src={item.image} alt={item.name} className=' w-1/3 h-2/3' />
                                 <div className='flex flex-col p-[1rem] w-full space-y-6 justify-center'>
@@ -79,12 +88,15 @@ export const SideCart = () => {
                                     </div>
                                 </div>
                             </div>
-                        ))}
+                        ))
+                    )}
                     </div>
-                    <div className='flex items-center justify-between p-[1.5rem] '>
-                        <h1>Subtotal: </h1>
-                        <h1>$ {calculateSubtotal().toFixed(2)}</h1>
-                    </div>
+                    {product.productItems.length > 0 && (
+                        <div className='flex items-center justify-between p-[1.5rem] '>
+                            <h1>Subtotal: </h1>
+                            <h1>$ {calculateSubtotal().toFixed(2)}</h1>
+                        </div>
+                    )}
                 </div>
         </div>
     );
