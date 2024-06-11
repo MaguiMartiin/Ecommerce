@@ -30,6 +30,12 @@ export const SideCart = () => {
         })
     }
 
+    const calculateSubtotal = () => {
+        return product.productItems.reduce((total, item) => {
+            return total + (item.price * item.quantity)
+        }, 0)
+    }
+    
     return (
         <div>
             {isSideCartOpen && 
@@ -74,6 +80,10 @@ export const SideCart = () => {
                                 </div>
                             </div>
                         ))}
+                    </div>
+                    <div className='flex items-center justify-between p-[1.5rem] '>
+                        <h1>Subtotal: </h1>
+                        <h1>$ {calculateSubtotal().toFixed(2)}</h1>
                     </div>
                 </div>
         </div>
