@@ -4,7 +4,7 @@ import { fetchProducts } from "../axios";
 export default async function Shop () {
     const products = await fetchProducts()
     return (
-        <div className="flex items-center pt-[5rem]">
+        <div className="flex items-center pt-[5.3rem]">
             <div className="grid grid-flow-row gap-1 grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 ">
                 {products.map(product => (
                     <Link key={product.id} href='/shop/[id]' as={`/shop/${product.id}`}>
