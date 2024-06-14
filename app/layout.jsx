@@ -5,6 +5,7 @@ import { fetchCategories } from './axios'
 import { StoreProvider } from '../components/Store'
 import { SideCart } from '@/components/SideCart'
 import { ModalSearch } from '@/components/ModalSearch'
+import { Footer } from '@/components/Footer'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -23,6 +24,7 @@ export default async function RootLayout({ children }) {
           <SideCart />
           <ModalSearch categories={categories}/>
           {children}
+          <Footer/>
         </body>
       </html>
     </StoreProvider>
