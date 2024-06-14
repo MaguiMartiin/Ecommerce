@@ -3,7 +3,6 @@
 @tailwind utilities;
 
 body.modal-open {
-  overflow-y: scroll; 
   width: 100%;
   padding-right: 15px;
 }
@@ -34,4 +33,9 @@ body.modal-open::-webkit-scrollbar {
 
 .shadow-text {
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.scrollbar-thumb-rounded {
+  scrollbar-color: #a1a1aa transparent;
+  scrollbar-width: thin;
 }
