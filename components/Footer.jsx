@@ -4,7 +4,7 @@ import { faLocationDot,  faEnvelope, faPhone  } from "@fortawesome/free-solid-sv
 
 export const Footer = () => {
     return (
-        <footer className="bg-cherry_blossom_pink-800 h-auto text-black p-[2rem] justify-center items-center ">
+        <footer className="bg-cherry_blossom_pink-800 h-auto text-black p-[2rem] justify-center items-center mt-[5rem] ">
             <div className="flex justify-around">
                 <div className="flex flex-col items-center w-1/3">
                     <h1 className="text-xl font-semibold mb-2">Contáctanos</h1>

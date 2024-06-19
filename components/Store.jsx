@@ -1,5 +1,5 @@
 'use client'
-import { useReducer, createContext, useContext } from "react";
+import { useReducer, createContext, useContext, useEffect } from "react";
 
 export const Store = createContext()
 
@@ -24,7 +24,9 @@ function reducer (state, action){
                         ? { ...item, quantity: item.quantity + newItem.quantity }
                         : item
                 );
-                return { ...state, product: { ...state.product, productItems } };
+                const updatedState = { ...state, product: { ...state.product, productItems } };
+                localStorage.setItem('cart', JSON.stringify(updatedState.product.productItems));
+                return updatedState;
             } else {
                 const productItems = [...state.product.productItems, newItem];
                 return { ...state, product: { ...state.product, productItems } };
@@ -39,13 +41,24 @@ function reducer (state, action){
                 }
                 return item
             })
-            return { ...state, product: { ...state.product, productItems: updatedProductItems } };
+            const updatedState = { ...state, product: { ...state.product, productItems: updatedProductItems } };
+            localStorage.setItem('cart', JSON.stringify(updatedState.product.productItems));
+            return updatedState;
         }
 
         case 'DELETE_PRODUCT': {
             const { id, size, color } = action.payload;
-            const updatedProductItems = state.product.productItems.filter(item => !(item.id === id && item.size === size && item.color === color));
-            return { ...state, product: { ...state.product, productItems: updatedProductItems } };
+            const updatedProductItems = state.product.productItems.filter(
+                item => !(item.id === id && item.size === size && item.color === color)
+            );
+            const updatedState = { ...state, product: { ...state.product, productItems: updatedProductItems } };
+            localStorage.setItem('cart', JSON.stringify(updatedState.product.productItems));
+            return updatedState;
+        }
+        
+        case 'LOAD_CART': {
+            const savedCart = action.payload || [];
+            return { ...state, product: { ...state.product, productItems: savedCart } };
         }
 
         case 'SET_SIDE_CART_OPEN': {
@@ -64,6 +77,10 @@ function reducer (state, action){
 export function StoreProvider({children}){
     const [state, dispatch] = useReducer(reducer, initialState)
     const value = {state, dispatch}
+    useEffect(() => {
+        const savedCart = JSON.parse(localStorage.getItem('cart'));
+        dispatch({ type: 'LOAD_CART', payload: savedCart });
+    }, []);
     return <Store.Provider value={value}>{children}</Store.Provider>
 }
 
