@@ -1,6 +1,7 @@
 'use client';
 import { useState, useEffect } from 'react';
 import Login from "../../components/Login";
+import Account from '@/components/Account';
 
 export default function MyAccount () {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -10,13 +11,6 @@ export default function MyAccount () {
         setIsLoggedIn(!!token)
     }, [])
 
-    const handleLogout = () => {
-        localStorage.removeItem('token')
-        setTimeout(() => {
-            setIsLoggedIn();
-        }, 1000);
-    }
-
     const handleLoginSuccess = () => {
         setIsLoggedIn(true)
     }
@@ -24,9 +18,8 @@ export default function MyAccount () {
     return(
         <div>
             {isLoggedIn ? (
-                <div className="pt-[5rem]">
-                    <h1>My Account</h1>
-                    <button onClick={handleLogout}>Cerrar sesión</button>
+                <div>
+                    <Account setIsLoggedIn={setIsLoggedIn} />
                 </div>
             ) : (
                 <div>

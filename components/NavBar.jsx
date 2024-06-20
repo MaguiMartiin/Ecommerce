@@ -80,7 +80,7 @@ export function NavBar ({categories}) {
             </div>
             <div className="flex w-1/4 text-lg justify-center space-x-4 items-center">    
                 <FontAwesomeIcon icon={faSearch} className="w-5 h-4 flex items-center cursor-pointer" onClick={openModalSearch} />
-                <Link href='/login'>
+                <Link href='/my-account'>
                     <FontAwesomeIcon icon={faUser} className="w-5 h-4 cursor-pointer  flex items-center" />
                 </Link>
                 <button className="flex justify-center items-center text-center" onClick={ openSideCart } >
