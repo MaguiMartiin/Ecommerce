@@ -5,8 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 
-
-export default function Login() {
+export default function Login({onLoginSuccess}) {
     const [showPasswords, setShowPasswords] = useState({});
 
     const login = async (values) => {
@@ -14,7 +13,13 @@ export default function Login() {
             const response = await axios.post('http://localhost:3001/users/login', {
                 email: values.email,
                 password: values.password
-            })
+            });
+            if (response.data.token) {
+                localStorage.setItem('token', response.data.token)
+                setTimeout(() => {
+                    onLoginSuccess()
+                }, 1000)
+            }
         } catch (error) {
             throw new Error(error.message);
         }
@@ -26,10 +31,10 @@ export default function Login() {
                 name: values.name, 
                 email: values.email,
                 password: values.password2
-            })
+            });
             alert('Cuenta creada exitosamente');
         } catch (error) {
-            alert(error.response?.data?.error || 'Error al crear cuenta. Por favor, intenta nuevamente.')
+            alert(error.response?.data?.error || 'Error al crear cuenta. Por favor, intenta nuevamente.');
         }
     };
 
@@ -37,8 +42,8 @@ export default function Login() {
         setShowPasswords((prevShowPasswords) => ({
             ...prevShowPasswords,
             [fieldName]: !prevShowPasswords[fieldName],
-        }))
-    }
+        }));
+    };
 
     return (
         <div className="flex justify-center items-start space-x-[5rem] p-[3rem] pt-[8rem]">
@@ -50,30 +55,31 @@ export default function Login() {
                     }}
                         initialValues={{email: '', password: ''}}
                         validate={(values) => {
-                            const errors = {}
+                            const errors = {};
                             if (!values.email) {
-                                errors.email = "Por favor ingresa un email."
+                                errors.email = "Por favor ingresa un email.";
                             } else if (
-                                !/^[\w-]+(\.[\w-]+)*@([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}$/.test( values.email)
-                            ) {errors.email = "Formato de email invalido."}
+                                !/^[\w-]+(\.[\w-]+)*@([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}$/.test(values.email)
+                            ) {errors.email = "Formato de email invalido.";}
 
                             if (!values.password) {
-                                errors.password = "Por favor ingresa tu contraseña."
+                                errors.password = "Por favor ingresa tu contraseña.";
                             } else if (values.password.length < 8) {
-                                errors.password = "La contraseña debe tener al menos 8 caracteres."}
-                            return errors
+                                errors.password = "La contraseña debe tener al menos 8 caracteres.";
+                            }
+                            return errors;
                         }}
                 >
                     {({handleSubmit}) => (
                         <Form onSubmit={handleSubmit}> 
-                            <div className=" flex flex-col justify-between">
+                            <div className="flex flex-col justify-between">
                                 <label htmlFor="email">Email</label>
                                 <Field type="email" id="email" name="email" placeholder='ej.:tunombre@email.com' className='p-[0.5rem] rounded h-[2rem]' />
                                 <div>
                                     <ErrorMessage name="email" component="p" className="text-red-500 text-sm absolute " />
                                 </div>
                             </div>
-                            <div  className=" flex flex-col justify-between mt-[2rem]">
+                            <div className="flex flex-col justify-between mt-[2rem]">
                                 <label htmlFor="password">Contraseña</label>
                                 <Field type={showPasswords['password'] ? 'text' : 'password'} id="password" name="password" className='p-[0.5rem] rounded h-[2rem]'/>
                                 <div className='flex justify-end bg-slate-500 items-end mr-[0.5rem]'>
@@ -88,7 +94,7 @@ export default function Login() {
                             <div className='mt-[1.5rem] text-sm font-bold'>
                                 <h1>¿Olvidaste tu contraseña?</h1>
                             </div>
-                            <button type="submit" className=' bg-black text-white w-full rounded p-[0.5rem] mt-[2rem] mb-[1rem] '>Ingresar</button>
+                            <button type="submit" className='bg-black text-white w-full rounded p-[0.5rem] mt-[2rem] mb-[1rem]'>Ingresar</button>
                         </Form>
                     )}
                 </Formik> 
@@ -102,61 +108,63 @@ export default function Login() {
                     }}
                         initialValues={{name: '', email: '', password1: '', password2: ''}}
                         validate={(values) => {
-                            const errors = {}
+                            const errors = {};
                             if (!values.name){
-                                errors.name = 'Por favor ingresa tu nombre.'
+                                errors.name = 'Por favor ingresa tu nombre.';
                             } else if (!/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(values.name)) {
-                                errors.name = 'Solo se permiten letras y espacios. '
+                                errors.name = 'Solo se permiten letras y espacios.';
                             }
 
                             if (!values.email) {
-                                errors.email = "Por favor ingresa un email."
+                                errors.email = "Por favor ingresa un email.";
                             } else if (
-                                !/^[\w-]+(\.[\w-]+)*@([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}$/.test( values.email)
-                            ) {errors.email = "Formato de email invalido."}
+                                !/^[\w-]+(\.[\w-]+)*@([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}$/.test(values.email)
+                            ) {errors.email = "Formato de email invalido.";}
 
                             if (!values.password1) {
-                                errors.password1 = "Por favor ingresa tu contraseña."
+                                errors.password1 = "Por favor ingresa tu contraseña.";
                             } else if (values.password1.length < 8) {
-                                errors.password1 = "La contraseña debe tener al menos 8 caracteres."}
+                                errors.password1 = "La contraseña debe tener al menos 8 caracteres.";
+                            }
                             
                             if (!values.password2) {
-                                errors.password2 = "Por favor confirma tu contraseña."
+                                errors.password2 = "Por favor confirma tu contraseña.";
                             } else if (values.password1 !== values.password2) {
-                                errors.password2 = "Las contraseñas no coinciden."}
+                                errors.password2 = "Las contraseñas no coinciden.";
+                            }
 
-                            return errors
+                            return errors;
                         }}
                 >
                     {({handleSubmit}) => (
                         <Form onSubmit={handleSubmit}> 
-                            <div className=" flex flex-col justify-between">
+                            <div className="flex flex-col justify-between">
                                 <label htmlFor="name">Nombre</label>
                                 <Field type="name" id="name" name="name" placeholder='ej.:María Perez' className='p-[0.5rem] rounded h-[2rem]' />
                                 <div>
                                     <ErrorMessage name="name" component="p" className="text-red-500 text-sm absolute " />
                                 </div>
                             </div>
-                            <div className=" flex flex-col justify-between mt-[2rem]">
+                            <div className="flex flex-col justify-between mt-[2rem]">
                                 <label htmlFor="email">Email</label>
                                 <Field type="email" id="email2" name="email" placeholder='ej.:tunombre@email.com' className='p-[0.5rem] rounded h-[2rem]' />
                                 <div>
                                     <ErrorMessage name="email" component="p" className="text-red-500 text-sm absolute " />
                                 </div>
                             </div>
-                            <div  className=" flex flex-col justify-between mt-[2rem]">
+                            <div className="flex flex-col justify-between mt-[2rem]">
                                 <label htmlFor="password1">Contraseña</label>
                                 <Field type={showPasswords['password1'] ? 'text' : 'password'} id="password1" name="password1" className='p-[0.5rem] rounded h-[2rem]'/>
                                 <div className='flex justify-end bg-slate-500 items-end mr-[0.5rem]'>
                                     <button className='absolute mb-[0.2rem]' onClick={() => togglePasswordVisibility('password1')} type='button'>
-                                        <FontAwesomeIcon icon={showPasswords['password1'] ? faEye : faEyeSlash}  />
+                                        <FontAwesomeIcon icon={showPasswords['password1'] ? faEye : faEyeSlash} />
                                     </button>
                                 </div>
                                 <div>
                                     <ErrorMessage name="password1" component="p" className="text-red-500 text-sm absolute " />
                                 </div>
                             </div>
-                            <div  className=" flex flex-col justify-between mt-[2rem]">
+                            <div className="flex flex-col justify-between mt-[2rem]">
                                 <label htmlFor="password">Confirmar contraseña</label>
                                 <Field type={showPasswords['password2'] ? 'text' : 'password'} id="password2" name="password2" className='p-[0.5rem] rounded h-[2rem]'/>
                                 <div className='flex justify-end bg-slate-500 items-end mr-[0.5rem]'>
@@ -168,7 +176,7 @@ export default function Login() {
                                     <ErrorMessage name="password2" component="p" className="text-red-500 text-sm absolute " />
                                 </div>
                             </div>
-                            <button type="submit" className=' bg-black text-white w-full rounded p-[0.5rem] mt-[3rem] mb-[1rem] '>Crear cuenta</button>
+                            <button type="submit" className='bg-black text-white w-full rounded p-[0.5rem] mt-[3rem] mb-[1rem]'>Crear cuenta</button>
                         </Form>
                     )}
                 </Formik>  
